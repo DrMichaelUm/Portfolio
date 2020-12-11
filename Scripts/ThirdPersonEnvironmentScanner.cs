@@ -237,13 +237,6 @@ namespace Bimicore.BSG.ThirdPerson
 
 			if (obstacleCheck.debugDraw && _physicalProperties != null)
 			{
-				// var height = _physicalProperties.Cl.height - _physicalProperties.Cl.radius * 2;
-				// var position = transform.position + _physicalProperties.Cl.center;
-				//
-				// Vector3 point1 = position - Vector3.up * height * 0.5f +
-				//                  transform.forward * obstacleCheck.ray.checkDistance;
-				// Vector3 point2 = point1 + Vector3.up * height;
-
 				GizmosDrawer.DrawWireCapsule(_physicalProperties.CapsuleRayParams.topPoint + transform.forward * obstacleCheck.ray.checkDistance,
 				                             _physicalProperties.CapsuleRayParams.bottomPoint + transform.forward * obstacleCheck.ray.checkDistance,
 				                             _physicalProperties.Cl.radius,
