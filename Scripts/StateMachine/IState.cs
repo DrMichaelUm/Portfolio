@@ -6,7 +6,7 @@
 	public interface IState
 	{
 		/// <summary>
-		/// Can this state be entered now. If now, the number indicates how many scripts forbid it
+		/// Can this state be entered now. If not, the number indicates how many scripts forbid it
 		/// </summary>
 		int StateRestrictorsCount { get; set; }
 
