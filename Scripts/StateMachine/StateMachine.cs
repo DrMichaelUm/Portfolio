@@ -49,16 +49,11 @@ namespace Bimicore.BSG.StateMachinePattern
         /// </summary>
         public void Tick()
         {
-            //Profiler.BeginSample("StateMachineTick");
-            //if (isActive) {
+            var transition = GetTransition();
+            if (transition != null)
+            SetState(transition.To);
 
-                var transition = GetTransition();
-                if (transition != null)
-                    SetState(transition.To);
-
-                _currentState?.Tick();
-            //}
-            //Profiler.EndSample();
+            _currentState?.Tick();
         }
 
         public void FixedTick()
@@ -82,7 +77,6 @@ namespace Bimicore.BSG.StateMachinePattern
             if (_currentTransitions == null)
                 _currentTransitions = EmptyTransitions;
             
-            Debug.Log("State: " + _currentState?.GetType());
             _currentState?.OnEnter();
         }
 
