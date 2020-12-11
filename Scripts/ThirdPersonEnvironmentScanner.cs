@@ -14,11 +14,18 @@ namespace Bimicore.BSG.ThirdPerson
 
 		[SerializeField] private Vector3 playerUp;
 		[SerializeField] private Vector3 playerBottom;
+		
+		[Space]
+		
 		[SerializeField] private GroundCheck groundCheck;
 
-		[Space] [SerializeField] private ObstacleCheck obstacleCheck;
+		[Space] 
+		
+		[SerializeField] private ObstacleCheck obstacleCheck;
 
-		[Space] [SerializeField] private RaySettings upSpaceCheck;
+		[Space] 
+		
+		[SerializeField] private RaySettings upSpaceCheck;
 			
 		private ThirdPersonMovementPhysicalProperties _physicalProperties;
 		private RaycastHit? _obstacleHit;
@@ -170,45 +177,6 @@ namespace Bimicore.BSG.ThirdPerson
 
 		private bool IsObstacleScaleMatch ( float length, float height) => _obstacleHit.Value.collider.transform.localScale.x <= length && _obstacleHit.Value.collider.transform.localScale.y <= height;
 
-		public Vector3 TryGetDistanceToBorder (Vector3 direction, float distance = 0f)
-		{
-			if (distance == 0f)
-				distance = obstacleCheck.ray.checkDistance + 1f;
-			
-			if (IsObstacleHitRecorded(direction, distance))
-			{
-				return GetDistanceToBorder(direction, distance);
-			}
-
-			return Vector3.negativeInfinity;
-		}
-
-		public Vector3 TryGetBorderPoint (Vector3 direction, float distance = 0f)
-		{
-			if (distance == 0f)
-				distance = obstacleCheck.ray.checkDistance + 1f;
-			
-			if (IsObstacleHitRecorded(direction, distance))
-			{
-				return GetBorderPoint(direction, distance);
-			}
-			
-			return Vector3.negativeInfinity;
-		}
-		private Vector3 GetDistanceToBorder (Vector3 direction, float distance = 0f)
-		{
-			Vector3 borderPoint = GetBorderPoint(direction, distance);
-			
-			return  transform.TransformPoint(playerBottom) - borderPoint;
-		} 
-		private Vector3 GetBorderPoint (Vector3 direction, float distance = 0f)
-		{
-			if (distance == 0f)
-				distance = obstacleCheck.ray.checkDistance + 1f;
-			
-			return new Vector3(_obstacleHit.Value.point.x, _obstacleHit.Value.collider.bounds.max.y, _obstacleHit.Value.point.z);
-		}
-
 		public bool IsObstacleHitRecorded (Vector3 direction, float distance)
 		{
 			if (Physics.CapsuleCast(_physicalProperties.CapsuleRayParams.topPoint,
@@ -228,8 +196,6 @@ namespace Bimicore.BSG.ThirdPerson
 			_obstacleHit = null;
 			return false;
 		}
-		
-		
 
 		public bool IsFreeAbove() => IsFreeAbove(upSpaceCheck.checkDistance);
 
